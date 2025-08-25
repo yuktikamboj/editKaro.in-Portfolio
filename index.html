@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editkaro.in Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #0f0f0f;
+      color: #f0f0f0;
+    }
+
+    header {
+      background: #1a1a1a;
+      color: #00e5ff;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 0 10px #00e5ff;
+    }
+
+    .links {
+      text-align: center;
+      margin: 1rem 0;
+    }
+
+    .links a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #ff9800;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .links a:hover {
+      color: #ffc107;
+    }
+
+    .search-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 2rem auto;
+      max-width: 500px;
+      padding: 0.5rem;
+      background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+      border-radius: 50px;
+      box-shadow: #00e5ff;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 0.8rem 1.2rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      background-color: #2c2c2c;
+      color: #fff;
+      outline: none;
+    }
+
+    .search-input::placeholder {
+      color: #aaa;
+    }
+
+    .search-btn {
+      padding: 0.8rem 1rem;
+      border: none;
+      border-radius: 50%;
+      background-color: #ff9800;
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .search-btn:hover {
+      background-color: #36b4ae;
+      transform: scale(1.1);
+    }
+
+    .custom-dropdown {
+  position: relative;
+  width: 300px;
+  margin: 2rem auto;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.dropdown-selected {
+  background: #1f1f1f;
+  color: #ff9800;
+  padding: 0.8rem 1.2rem;
+  border-radius: 30px;
+  border: 2px solid #fff;
+  box-shadow: 0 0 10px #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dropdown-selected:hover {
+  background: #36b4ae;
+  
+  color: #fff;
+  /* box-shadow: 0 0 15px #fff; */
+}
+
+.dropdown-options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: #2c2c2c;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0,229,255,0.2);
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: top;
+  transition: transform 0.3s ease;
+  width: 100%;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.dropdown-options.show {
+  transform: translateX(-50%) scaleY(1);
+}
+
+.dropdown-options li {
+  padding: 0.8rem;
+  color: #fff;
+  background: #3a3a3a;
+  border-bottom: 1px solid #444;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.dropdown-options li:hover {
+  background: #36b4ae;
+  color: #000;
+}
+
+    .video-card {
+  background: #1f1f1f;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+  max-width: 280px;
+  margin: auto;
+}
+
+.video-card:hover {
+  transform: scale(1.03);
+  box-shadow:#36b4ae;
+}
+
+.video-card iframe {
+  width: 100%;
+  height: 160px;
+  border: none;
+  border-bottom: 2px solid #ff9800;
+}
+
+.dropdown-filter select {
+  padding: 0.6rem 1.2rem;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
+  color: #ff9800;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.3);
+  appearance: none;
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.dropdown-filter {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-filter::after {
+  content: "▼";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ff9800;
+  pointer-events: none;
+  font-size: 0.8rem;
+}
+
+
+    .dropdown-filter select:hover {
+      background: #ff4081;
+      box-shadow: 0 0 15px #ff4081;
+    }
+
+    .portfolio {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      padding: 1rem;
+    }
+
+    .video-card {
+  background: #1f1f1f;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+  max-width: 280px;
+  margin: auto;
+}
+
+.video-card:hover {
+  transform: scale(1.03);
+  box-shadow: #36b4ae;
+}
+
+.video-card iframe {
+  width: 100%;
+  height: 160px;
+  border: none;
+  border-bottom: 2px solid #ff9800;
+}
+
+
+    .video-card h3 {
+      margin: 0.5rem;
+      font-size: 1rem;
+      color: #ff9800;
+    }
+
+    .video-card p {
+      margin: 0.5rem;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    @media (max-width: 768px) {
+      .portfolio {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* 🎨 Styling for Contact Box */
+.contact-box {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 50px 30px;
+  background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+  border-radius: 20px;
+  text-align: center;
+  border: 1px solid #36b4ae;
+}
+
+.contact-box h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #36b4ae;
+  /* text-shadow: 0 0 7px #feffff; */
+}
+
+.contact-box p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #ccc;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social-links a {
+  padding: 14px 24px;
+  background-color: #1f1f1f;
+  border: 2px solid #333;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #ff9800;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 152, 0, 0.2);
+}
+
+.social-links a:hover {
+  background-color: #105657;
+  color: #fff;
+  border-color: #ffffff;
+  box-shadow: 0 0 15px rgba(124, 199, 219, 0.6);
+  transform: scale(1.05);
+}
+  </style>
+</head>
+<body>
+
+ 
+  <section class="contact-box">
+  <h2>🎬 Editkaro.in Portfolio</h2>
+  <p>Explore our creative work across categories</p>
+  
+  <div class="social-links">
+    <a href="https://instagram.com" target="_blank">Instagram</a>
+    <a href="mailto:hello@editkaro.in">Email Us</a>
+    <a href="https://wa.me/919999999999" target="_blank">WhatsApp</a>
+    <a href="/Editkaro_Portfolio.pdf" download>Download Portfolio</a>
+    <a href="https://linkedin.com/in/editkaro" target="_blank">LinkedIn</a>
+  </div>
+</section>
+
+
+  <div class="search-container">
+    <input type="text" class="search-input" id="searchBar" placeholder="Search videos..." />
+    <button class="search-btn">🔎</button>
+  </div>
+
+  <div class="custom-dropdown">
+  <div class="dropdown-selected" id="selected">🎯 Filter by Category</div>
+  <ul class="dropdown-options" id="options">
+    <li data-value="short">Short-form</li>
+    <li data-value="long">Long-form</li>
+    <li data-value="gaming">Gaming</li>
+    <li data-value="football">Football</li>
+    <li data-value="ads">Ads</li>
+    <li data-value="ecommerce">eCommerce</li>
+    <li data-value="documentary">Documentary</li>
+    <li data-value="color">Color Grading</li>
+    <li data-value="anime">Anime</li>
+    <li data-value="all">All</li>
+  </ul>
+</div>
+
+
+  <div class="portfolio" id="portfolio">
+    <!-- Video Cards -->
+    <div class="video-card" data-category="short">
+      <iframe src="https://www.youtube.com/embed/LbRTEiRTf8s" allowfullscreen></iframe>
+      <h3>Short-form Editing</h3>
+      <p>Quick, engaging edits for Instagram Reels and TikTok.</p>
+    </div>
+
+    <div class="video-card" data-category="long">
+      <iframe src="https://www.youtube.com/embed/LAUEUTPQZrE" allowfullscreen></iframe>
+      <h3>Long-form Editing</h3>
+      <p>In-depth storytelling for YouTube and podcasts.</p>
+    </div>
+
+    <div class="video-card" data-category="gaming">
+      <iframe src="https://www.youtube.com/embed/78zUjUKrwlU" allowfullscreen></iframe>
+      <h3>Gaming Edits</h3>
+      <p>High-energy montages and commentary edits.</p>
+    </div>
+
+    <div class="video-card" data-category="football">
+      <iframe src="https://www.youtube.com/embed/oI5S3MQA8io" allowfullscreen></iframe>
+      <h3>Football Edits</h3>
+      <p>Dynamic sports highlights with music sync.</p>
+    </div>
+
+    <div class="video-card" data-category="ads">
+      <iframe src="https://www.youtube.com/embed/qqiqlJEvTvg" allowfullscreen></iframe>
+      <h3>Ad Editing</h3>
+      <p>Conversion-focused edits for paid campaigns.</p>
+    </div>
+
+    <div class="video-card" data-category="ecommerce">
+      <iframe src="https://www.youtube.com/embed/LhVqwW1qWQw" allowfullscreen></iframe>
+      <h3>eCommerce Ads</h3>
+      <p>Product-centric videos designed to drive purchases.</p>
+    </div>
+
+    <div class="video-card" data-category="documentary">
+      <iframe src="https://www.youtube.com/embed/_cQG57D4FQg" allowfullscreen></iframe>
+      <h3>Documentary Style</h3>
+      <p>Structured storytelling with interviews and b-roll.</p>
+    </div>
+
+    <div class="video-card" data-category="color">
+      <iframe src="https://www.youtube.com/embed/huMGyDnq0bk" allowfullscreen></iframe>
+      <h3>Color Grading</h3>
+        <p>Enhancing mood and tone through color correction.</p>    
+    </div>
+
+<script>
+  const selected = document.getElementById("selected");
+  const options = document.getElementById("options");
+  const videoCards = document.querySelectorAll(".video-card");
+
+
+  const searchInput = document.getElementById("searchBar");
+  const searchButton = document.querySelector(".search-btn");
+  
+
+
+  selected.addEventListener("click", () => {
+    options.classList.toggle("show");
+  });
+
+  options.querySelectorAll("li").forEach(option => {
+    option.addEventListener("click", () => {
+      const value = option.getAttribute("data-value");
+      selected.textContent = `🎯 ${option.textContent}`;
+      options.classList.remove("show");
+
+      videoCards.forEach(card => {
+        const category = card.getAttribute("data-category");
+        card.style.display = (value === "all" || category === value) ? "block" : "none";
+      });
+    });
+  });
+
+  // Optional: close dropdown if clicked outside
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".custom-dropdown")) {
+      options.classList.remove("show");
+    }
+  });
+
+
+
+  function performSearch() {
+    const query = searchInput.value.toLowerCase().trim();
+
+    videoCards.forEach(card => {
+      const title = card.querySelector("h3").textContent.toLowerCase();
+      const description = card.querySelector("p").textContent.toLowerCase();
+
+      if (title.includes(query) || description.includes(query)) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+
+  searchButton.addEventListener("click", performSearch);
+
+  searchInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      performSearch();
+    }
+  });
+
+  searchInput.addEventListener("input", () => {
+    if (searchInput.value.trim() === "") {
+      videoCards.forEach(card => card.style.display = "block");
+    }
+  });
+
+</script>
